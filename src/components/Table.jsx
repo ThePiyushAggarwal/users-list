@@ -1,12 +1,17 @@
-import { useContext, useEffect } from 'react'
-import Context from '../context/Context'
+import { useEffect, useState } from 'react'
 
 function Table() {
-  const { getUsers, user } = useContext(Context)
+  const [list, setList] = useState({})
 
   useEffect(() => {
-    getUsers()
-  })
+    fetch('https://randomuser.me/api/?inc=name')
+      .then((res) => res.json())
+      .then((data) => {
+        setList(data)
+      })
+  }, [])
+
+  const {[name]} = list.results
 
   return (
     <div>
@@ -21,7 +26,7 @@ function Table() {
         <tbody>
           <tr>
             <th scope="row">1</th>
-            <td>{user[0].name.first}</td>
+            <td>{console.log(name.first)}</td>
             <td></td>
           </tr>
         </tbody>
