@@ -1,3 +1,4 @@
+import SearchBar from './components/SearchBar'
 import Table from './components/Table'
 
 function App() {

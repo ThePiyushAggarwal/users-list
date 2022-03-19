@@ -21,10 +21,28 @@ function Table() {
     })
   }
 
-  list && console.log(list)
+  if (list) {
+    const fun = (item) => {
+      if (item.gender === 'male') {
+        return true
+      }
+    }
+    const secondList = list.filter(fun)
+    console.log(secondList)
+  }
 
   return (
     <div>
+      // search input container
+      <div className="pt-5 mb-5">
+        <p>SearchBar</p>
+        <form onSubmit={onSubmit}>
+          <input type="text" className="form-control mb-2" id="search" />
+          <button type="submit" className="btn btn-primary">
+            Search
+          </button>
+        </form>
+      </div>
       <table className="table">
         <thead>
           <tr>
