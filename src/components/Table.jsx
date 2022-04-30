@@ -11,6 +11,10 @@ function Table() {
       })
   }, [])
 
+  const onSubmit = (e) => {
+    e.preventDefault()
+  }
+
   // converting date to readable format
   const time = (d) => {
     let date = new Date(d)
@@ -33,7 +37,6 @@ function Table() {
 
   return (
     <div>
-      // search input container
       <div className="pt-5 mb-5">
         <p>SearchBar</p>
         <form onSubmit={onSubmit}>
