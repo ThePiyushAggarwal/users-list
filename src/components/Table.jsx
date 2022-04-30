@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { FaSort } from 'react-icons/fa'
 
 function Table() {
   const [list, setList] = useState()
@@ -37,7 +38,7 @@ function Table() {
 
   return (
     <div>
-      <div className="pt-5 mb-5">
+      {/* <div className="pt-5 mb-5">
         <p>SearchBar</p>
         <form onSubmit={onSubmit}>
           <input type="text" className="form-control mb-2" id="search" />
@@ -45,7 +46,7 @@ function Table() {
             Search
           </button>
         </form>
-      </div>
+      </div> */}
       <table className="table">
         <thead>
           <tr>
@@ -60,10 +61,22 @@ function Table() {
                 <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
               </svg>
             </th>
-            <th scope="column">Name</th>
-            <th scope="column">Gender</th>
-            <th scope="column">DOB</th>
-            <th scope="column">Email</th>
+            <th scope="column">
+              Name
+              <FaSort />
+            </th>
+            <th scope="column">
+              Gender
+              <FaSort />
+            </th>
+            <th scope="column">
+              DOB
+              <FaSort />
+            </th>
+            <th scope="column">
+              Email
+              <FaSort />
+            </th>
           </tr>
         </thead>
         <tbody>
