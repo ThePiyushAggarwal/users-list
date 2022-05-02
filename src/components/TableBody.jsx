@@ -1,5 +1,8 @@
-function TableBody({ filteredList }) {
-  // converting date to readable format
+import { AiFillCheckCircle } from 'react-icons/ai'
+import { AiOutlineCheckCircle } from 'react-icons/ai'
+
+function TableBody({ filteredList, modifyList }) {
+  // Converting date to readable format
   const time = (d) => {
     let date = new Date(d)
     return date.toLocaleDateString(undefined, {
@@ -13,11 +16,12 @@ function TableBody({ filteredList }) {
     <tbody>
       {filteredList &&
         filteredList.map((item) => (
-          <tr key={item.dateofbirth}>
+          <tr
+            key={item.dateofbirth}
+            onClick={() => modifyList(item.dateofbirth)}
+          >
             <th scope="row">
-              <form>
-                <input type="checkbox" />
-              </form>
+              {item.checked ? <AiOutlineCheckCircle /> : <AiFillCheckCircle />}
             </th>
             <td>
               {item.first_name} {item.last_name}

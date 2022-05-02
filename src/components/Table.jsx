@@ -21,6 +21,7 @@ function Table() {
             dateofbirth: item.dob.date,
             email: item.email,
             picture: item.picture.thumbnail,
+            checked: false,
           }
         })
         console.log(x)
@@ -46,11 +47,24 @@ function Table() {
     }
   }
 
+  // this function toggles the selected data
+  const modifyList = (id) => {
+    setFilteredList(
+      filteredList.map((item) => {
+        if (item.dateofbirth === id) {
+          return { ...item, checked: !item.checked }
+        } else {
+          return item
+        }
+      })
+    )
+  }
+
   return (
     <div>
       <table className="table">
         <TableHead sorting={sorting} />
-        <TableBody filteredList={filteredList} />
+        <TableBody filteredList={filteredList} modifyList={modifyList} />
       </table>
     </div>
   )
