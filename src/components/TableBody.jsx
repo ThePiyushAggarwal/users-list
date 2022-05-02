@@ -49,9 +49,11 @@ function TableBody({ filteredList, modifyList, searchTerm }) {
             >
               <th scope="row">
                 {!item.checked ? (
-                  <AiOutlineCheckCircle />
+                  <AiOutlineCheckCircle style={{ fontSize: '25px' }} />
                 ) : (
-                  <AiFillCheckCircle />
+                  <AiFillCheckCircle
+                    style={{ fontSize: '25px', color: 'dodgerblue' }}
+                  />
                 )}
               </th>
               <td>

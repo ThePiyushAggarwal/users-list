@@ -1,7 +1,7 @@
 function SearchBar({ searchTerm, setSearchTerm }) {
   return (
-    <div className="pt-5 mb-5">
-      <p>SearchBar</p>
+    <div className="">
+      <p>Search Here</p>
       <form>
         <input
           type="text"
@@ -10,9 +10,6 @@ function SearchBar({ searchTerm, setSearchTerm }) {
           className="form-control mb-2"
           id="search"
         />
-        <button type="submit" className="btn btn-primary">
-          Search
-        </button>
       </form>
     </div>
   )

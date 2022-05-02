@@ -6,7 +6,7 @@ function TableHead({ sorting }) {
     <thead>
       <tr>
         <th scope="column">
-          <AiOutlineCheckCircle />
+          <AiOutlineCheckCircle style={{ fontSize: '25px' }} />
         </th>
         <th scope="column" onClick={() => sorting('first_name')}>
           Name

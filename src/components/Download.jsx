@@ -19,15 +19,19 @@ function Download({ finalSelectedData }) {
   }
   return (
     <div>
-      Set File name before downloading:
-      <input
-        type="text"
-        value={filename}
-        onChange={(e) => setFilename(e.target.value)}
-      />
-      <CSVLink {...csvReport}>
-        <button>Download File</button>
-      </CSVLink>
+      <p>Select data to download and</p>
+      <p>Set File name before downloading:</p>
+      <div className="d-flex">
+        <input
+          type="text"
+          value={filename}
+          onChange={(e) => setFilename(e.target.value)}
+          className="form-control"
+        />
+        <CSVLink {...csvReport}>
+          <button className="btn btn-primary">Download File</button>
+        </CSVLink>
+      </div>
     </div>
   )
 }
