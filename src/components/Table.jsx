@@ -1,102 +1,56 @@
 import { useEffect, useState } from 'react'
-import { FaSort } from 'react-icons/fa'
+import TableBody from './TableBody'
+import TableHead from './TableHead'
 
 function Table() {
-  const [list, setList] = useState()
+  const [filteredList, setFilteredList] = useState([])
+  const [order, setOrder] = useState('ASC')
 
+  // This gets the data when the app runs for the first time
   useEffect(() => {
-    fetch('https://randomuser.me/api/?results=10&exc=login&noinfo')
+    fetch('https://randomuser.me/api/?results=10&noinfo&')
       .then((res) => res.json())
       .then((data) => {
-        setList(data.results)
+        // Getting the data in a less sophisticated array
+        // This will ensure the simplification of sorting function
+        const x = data.results.map((item) => {
+          return {
+            first_name: item.name.first,
+            last_name: item.name.last,
+            gender: item.gender,
+            dateofbirth: item.dob.date,
+            email: item.email,
+            picture: item.picture.thumbnail,
+          }
+        })
+        console.log(x)
+        setFilteredList(x)
       })
   }, [])
 
-  const onSubmit = (e) => {
-    e.preventDefault()
-  }
-
-  // converting date to readable format
-  const time = (d) => {
-    let date = new Date(d)
-    return date.toLocaleDateString(undefined, {
-      month: 'long',
-      year: 'numeric',
-      day: 'numeric',
-    })
-  }
-
-  if (list) {
-    const fun = (item) => {
-      if (item.gender === 'male') {
-        return true
-      }
+  // This sorts the table data and makes it re-render on screen
+  // I am not able to write this on my own yet
+  const sorting = (col) => {
+    if (order === 'ASC') {
+      const sorted = [...filteredList].sort((a, b) =>
+        a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
+      )
+      setFilteredList(sorted)
+      setOrder('DSC')
+    } else {
+      const sorted = [...filteredList].sort((a, b) =>
+        a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
+      )
+      setFilteredList(sorted)
+      setOrder('ASC')
     }
-    const secondList = list.filter(fun)
-    console.log(secondList)
   }
 
   return (
     <div>
-      {/* <div className="pt-5 mb-5">
-        <p>SearchBar</p>
-        <form onSubmit={onSubmit}>
-          <input type="text" className="form-control mb-2" id="search" />
-          <button type="submit" className="btn btn-primary">
-            Search
-          </button>
-        </form>
-      </div> */}
       <table className="table">
-        <thead>
-          <tr>
-            <th scope="column">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-              </svg>
-            </th>
-            <th scope="column">
-              Name
-              <FaSort />
-            </th>
-            <th scope="column">
-              Gender
-              <FaSort />
-            </th>
-            <th scope="column">
-              DOB
-              <FaSort />
-            </th>
-            <th scope="column">
-              Email
-              <FaSort />
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {list &&
-            list.map((item, index) => (
-              <tr key={index}>
-                <th scope="row">
-                  <form>
-                    <input type="checkbox" />
-                  </form>
-                </th>
-                <td>
-                  {item.name.first} {item.name.last}
-                </td>
-                <td>{item.gender}</td>
-                <td>{time(item.dob.date)}</td>
-                <td>{item.email}</td>
-              </tr>
-            ))}
-        </tbody>
+        <TableHead sorting={sorting} />
+        <TableBody filteredList={filteredList} />
       </table>
     </div>
   )
