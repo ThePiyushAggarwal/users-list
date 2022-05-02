@@ -3,13 +3,13 @@ import TableBody from './TableBody'
 import TableHead from './TableHead'
 import Download from './Download'
 
-function Table() {
+function Table({ searchTerm }) {
   const [filteredList, setFilteredList] = useState([])
   const [order, setOrder] = useState('ASC')
 
   // This gets the data when the app runs for the first time
   useEffect(() => {
-    fetch('https://randomuser.me/api/?results=10&noinfo&')
+    fetch('https://randomuser.me/api/?results=20&noinfo')
       .then((res) => res.json())
       .then((data) => {
         // Getting the data in a less sophisticated array
@@ -76,7 +76,11 @@ function Table() {
     <div>
       <table className="table">
         <TableHead sorting={sorting} />
-        <TableBody filteredList={filteredList} modifyList={modifyList} />
+        <TableBody
+          filteredList={filteredList}
+          modifyList={modifyList}
+          searchTerm={searchTerm}
+        />
       </table>
       <Download finalSelectedData={finalSelectedData} />
     </div>
