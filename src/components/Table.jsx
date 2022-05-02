@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import TableBody from './TableBody'
 import TableHead from './TableHead'
+import Download from './Download'
 
 function Table() {
   const [filteredList, setFilteredList] = useState([])
@@ -24,7 +25,6 @@ function Table() {
             checked: false,
           }
         })
-        console.log(x)
         setFilteredList(x)
       })
   }, [])
@@ -60,12 +60,25 @@ function Table() {
     )
   }
 
+  // Every piece of data that is checked is added to this array
+  const selectedData = filteredList.filter((item) => item.checked)
+
+  // It convers date to readable format
+  // I guess it is esssential because it needs to be exported to CSV
+  const finalSelectedData = selectedData.map((item) => {
+    return {
+      ...item,
+      dateofbirth: new Date(item.dateofbirth).toDateString(),
+    }
+  })
+
   return (
     <div>
       <table className="table">
         <TableHead sorting={sorting} />
         <TableBody filteredList={filteredList} modifyList={modifyList} />
       </table>
+      <Download finalSelectedData={finalSelectedData} />
     </div>
   )
 }

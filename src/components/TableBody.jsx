@@ -21,7 +21,7 @@ function TableBody({ filteredList, modifyList }) {
             onClick={() => modifyList(item.dateofbirth)}
           >
             <th scope="row">
-              {item.checked ? <AiOutlineCheckCircle /> : <AiFillCheckCircle />}
+              {!item.checked ? <AiOutlineCheckCircle /> : <AiFillCheckCircle />}
             </th>
             <td>
               {item.first_name} {item.last_name}
